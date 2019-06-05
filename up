@@ -1,0 +1,14 @@
+#!/bin/sh
+
+docker run \
+    --rm \
+    --name "frc-server" \
+    -d \
+    -v "$PWD/nginx.frc.conf:/etc/nginx/nginx.conf" \
+    -v "$PWD/dummy_credentials/frc-server-crt.pem:/etc/nginx/ssl/frc-server-crt.pem" \
+    -v "$PWD/dummy_credentials/frc-server-key.pem:/etc/nginx/ssl/frc-server-key.pem" \
+    -v "$PWD/static:/data/www" \
+    -v "$PWD/logs:/var/log/nginx" \
+    -p "80:80" \
+    -p "443:443" \
+    nginx:1.17.0-alpine
